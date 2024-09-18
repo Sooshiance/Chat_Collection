@@ -1,0 +1,13 @@
+{% extends 'root.html' %}
+
+{% block title %}
+  Halls
+{% endblock %}
+
+{% block doc %}
+  <div>
+    {% for room in rooms %}
+      <h2><a href="{% url 'chat:room' room.pk %}">{{ room.title }}</a></h2>
+    {% endfor %}
+  </div>
+{% endblock %}

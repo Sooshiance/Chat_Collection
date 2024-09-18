@@ -1,0 +1,65 @@
+{% extends 'root.html' %}
+
+{% block title %}
+  {{ room_name.title }}
+{% endblock %}
+
+{% block doc %}
+  <div class="text-center h1 p-3 m-4" style="color: rgb(0, 200, 180);">{{ room_name.title }}</div>
+
+  <div class="text-center">
+    <div class="m-5">
+      <div>
+        <label class="m-2" for="">پاسخها</label>
+      </div>
+      <div class="m-3">
+        <textarea id="chat-log" cols="100" rows="10" class="rounded"></textarea><br />
+      </div>
+    </div>
+    {% csrf_token %}
+    <div class="m-5">
+      <div class="m-3">شما بنویسید</div>
+      <div class="m-2">
+        <input id="chat-message-input" type="text" size="100" class="rounded" /><br />
+      </div>
+    </div>
+    <div class="flex m-3 p-3">
+      <input id="chat-message-submit" type="button" value="Send" class="rounded" />
+    </div>
+  </div>
+
+  {{ room_name.pk|json_script:'room-name' }}
+  <script>
+    const roomName = JSON.parse(document.getElementById('room-name').textContent)
+    
+    const chatSocket = new WebSocket('ws://' + window.location.host + '/ws/chat/' + roomName + '/')
+    
+    chatSocket.onmessage = function (e) {
+      const data = JSON.parse(e.data)
+      document.querySelector('#chat-log').value += data.message + '\n'
+    }
+    
+    chatSocket.onclose = function (e) {
+      console.error('Chat socket closed unexpectedly')
+    }
+    
+    document.querySelector('#chat-message-input').focus()
+    document.querySelector('#chat-message-input').onkeyup = function (e) {
+      if (e.key === 'Enter') {
+        // enter, return
+        document.querySelector('#chat-message-submit').click()
+      }
+    }
+    
+    document.querySelector('#chat-message-submit').onclick = function (e) {
+      const messageInputDom = document.querySelector('#chat-message-input')
+      const message = messageInputDom.value
+      chatSocket.send(
+        JSON.stringify({
+          message: message
+        })
+      )
+      messageInputDom.value = ''
+    }
+  </script>
+{% endblock %}

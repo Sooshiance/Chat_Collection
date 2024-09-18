@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     # TODO : add django channels
     'channels' ,
 
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'chat.apps.ChatConfig',
 ]
 
 
@@ -90,6 +91,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+    # TODO: Heart beat signal for check online/offline status
+    'chat.middleware.UserActivityMiddleware',
+
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
