@@ -1,0 +1,40 @@
+{% extends 'root.html' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block doc %}
+  <div class="vh-80 d-flex justify-content-center align-items-center">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class="card bg-white">
+            <div class="card-body p-5">
+              <form class="mb-3 mt-md-4" action="{% url 'user:login' %}" method="post">
+                <p class="mb-5">اطلاعات خود را وارد کنید</p>
+                <div class="mb-3">
+                  <label for="phone" class="form-label">شماره تلفن</label>
+                  <input type="phone" name="phone" class="form-control" id="phone" placeholder="09123456789" />
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">گذر واژه</label>
+                  <input type="password" name="password" class="form-control" id="password" placeholder="••••••••••••" />
+                </div>
+                {% csrf_token %}
+                <div class="d-grid mb-3 mt-3">
+                  <button class="btn btn-outline-dark" type="submit">وارد شدن</button>
+                </div>
+              </form>
+              <div>
+                <p class="mb-0 text-center">
+                  اگر حساب کاربری ندارید <a href="{% url 'user:register' %}" class="text-primary fw-bold">ثبت نام کنید</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

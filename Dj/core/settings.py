@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     # TODO : add django channels
     'channels' ,
+
+    'user.apps.UserConfig'
 ]
 
 
