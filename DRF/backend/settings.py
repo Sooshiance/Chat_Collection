@@ -27,7 +27,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     # TODO: Local app
     'user.apps.UserConfig',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
@@ -176,3 +177,19 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.1.53:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+
+# TODO: ASGI settings
+ASGI_APPLICATION = "backend.asgi.application"
+
+
+# TODO: Channel setup
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
