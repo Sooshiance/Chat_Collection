@@ -99,7 +99,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ChatApp.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -122,11 +122,11 @@ TEMPLATES = [
 
 
 # TODO : Web Server gateway
-WSGI_APPLICATION = 'ChatApp.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # TODO : Asynchronous gateway
-ASGI_APPLICATION = 'ChatApp.asgi.application'
+ASGI_APPLICATION = 'core.asgi.application'
 
 
 # Database
