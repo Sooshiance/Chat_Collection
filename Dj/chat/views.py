@@ -11,14 +11,14 @@ def home(request):
 
 def allHall(request):
     r = Room.objects.all()
-    return render(request, 'chat/allHall.html', {'rooms':r})
+    return render(request, "chat/allHall.html", {"rooms": r})
 
 
 def chatPage(request, pk, *args, **kwargs):
     room_name = Room.objects.get(pk=pk)
     if not request.user.is_authenticated:
         return redirect("user:login")
-    context = {'room_name': room_name}
+    context = {"room_name": room_name}
     return render(request, "chat/chatPage.html", context)
 
 
@@ -28,10 +28,12 @@ def createRoom(request):
             form = RegisterRoom(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('chat:room')
+                return redirect("chat:room")
             else:
-                return redirect('chat:create-room')
+                return redirect("chat:create-room")
         else:
-            return HttpResponseNotAllowed("""You don't have permission to access this page""")
+            return HttpResponseNotAllowed(
+                """You don't have permission to access this page"""
+            )
     else:
-        return redirect('user:login')
+        return redirect("user:login")

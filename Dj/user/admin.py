@@ -5,12 +5,17 @@ from .models import User
 
 
 class Admin(UserAdmin):
-    list_display = ('phone', 'username', 'is_active', 'pk',)
+    list_display = (
+        "phone",
+        "username",
+        "is_active",
+        "pk",
+    )
     filter_horizontal = ()
-    list_filter = ('is_active',)
+    list_filter = ("is_active",)
     fieldsets = ()
-    search_fields = ('username', 'phone')
-    list_display_links = ('phone', 'username')
+    search_fields = ("username", "phone")
+    list_display_links = ("phone", "username")
 
 
 admin.site.register(User, Admin)

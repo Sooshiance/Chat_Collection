@@ -8,4 +8,4 @@ class RegisterRoom(forms.ModelForm):
 
     class Meta:
         model = Room
-        fields = ['title']
+        fields = ["title"]
